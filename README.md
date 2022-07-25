@@ -1,16 +1,9 @@
-# project_saturdays
+# Saturdays
 
-A new Flutter project.
+![Thumbnail 2 (1)](https://user-images.githubusercontent.com/52365128/180835090-6c26e8ce-5e6c-4ebe-9803-4ae6f22345dd.png)
 
-## Getting Started
+An app that shows when starts and ends the saturday for christians, and reminds you before it starts/ends.
 
-This project is a starting point for a Flutter application.
+## Technical details
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This project is being develop with Flutter using the [Riverpod architecture](https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/) from [Andrea Bizzotto](https://github.com/bizz84), with a [feature-first](https://codewithandrea.com/articles/flutter-project-structure/) approach.
