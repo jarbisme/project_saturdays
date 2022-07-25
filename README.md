@@ -7,3 +7,5 @@ An app that shows when starts and ends the saturday for christians, and reminds 
 ## Technical details
 
 This project is being develop with Flutter using the [Riverpod architecture](https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/) from [Andrea Bizzotto](https://github.com/bizz84), with a [feature-first](https://codewithandrea.com/articles/flutter-project-structure/) approach.
+
+*Designed by me*
