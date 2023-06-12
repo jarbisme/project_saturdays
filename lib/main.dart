@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_saturdays/src/features/core/services/notification_service.dart';
 
 import 'package:project_saturdays/src/features/home/presentation/bloc/bloc/home_bloc.dart';
+import 'package:project_saturdays/src/features/notifications/presentation/bloc/notifications_bloc.dart';
 import 'package:project_saturdays/src/styles/colors.dart';
 import 'package:project_saturdays/src/features/home/presentation/home_screen.dart';
 
@@ -20,6 +21,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => HomeBloc(),
+        ),
+        BlocProvider(
+          create: (context) => NotificationsBloc(),
         )
       ],
       child: MaterialApp(
