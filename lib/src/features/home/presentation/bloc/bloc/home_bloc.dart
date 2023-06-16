@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:project_saturdays/src/features/home/data/repository/saturday_repository.dart';
+import 'package:project_saturdays/src/features/home/data/repositories/saturday_repository.dart';
 
 import 'package:project_saturdays/src/features/home/domain/sabbath.dart';
 
