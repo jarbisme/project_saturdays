@@ -29,7 +29,8 @@ class NotificationService {
     // final InitializationSettings initializationSettings =
     //     InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS, macOS: null);
 
-    const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
+    const AndroidInitializationSettings initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher'); // TODO: Add correct icon
     final DarwinInitializationSettings initializationSettingsDarwin = DarwinInitializationSettings();
     final LinuxInitializationSettings initializationSettingsLinux =
         LinuxInitializationSettings(defaultActionName: 'Open notification');
@@ -45,6 +46,9 @@ class NotificationService {
       initializationSettings,
       // onSelectNotification: selectNotification,
     );
+    flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestPermission();
   }
 
   AndroidNotificationDetails _androidNotificationDetails = AndroidNotificationDetails(
