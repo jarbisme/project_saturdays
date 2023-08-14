@@ -18,9 +18,9 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
       }
     });
     on<SetNotification>((event, emit) async {
-      // //  get notification object from state
+      // * get notification object from state
       // var notification = state.notifications.firstWhere((element) => element.id == event.notification.id);
-      // // get index of the notification
+      // * get index of the notification
       // var index = state.notifications.indexOf(notification);
 
       // var notifications = [...state.notifications];

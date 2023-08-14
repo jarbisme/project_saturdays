@@ -4,8 +4,8 @@ import 'package:project_saturdays/src/features/home/presentation/bloc/bloc/home_
 import 'package:project_saturdays/src/styles/colors.dart';
 import 'dart:math' as math;
 
-class PeriodHighlight extends StatelessWidget {
-  const PeriodHighlight({Key? key}) : super(key: key);
+class PeriodsTicks extends StatelessWidget {
+  const PeriodsTicks({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,29 +36,28 @@ class HighlightPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // canvas.rotate(2 * math.pi);
-
-    // * Line
+    var tickMarkLength = 25;
     final paint1 = Paint()
-      ..color = isSaturday ? Colors.white : kPrimaryColor
+      ..color = isSaturday ? Colors.white.withOpacity(0.3) : Colors.black.withOpacity(0.1)
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 3;
+      ..strokeWidth = 2;
+    const angle = 2 * math.pi / 7;
+    final radius = size.width / 2;
+    canvas.save();
 
-    final p1 = Offset((size.width / 2) - 1.5, 14);
-    final p2 = Offset((size.width / 2) - 1.5, 47);
-    canvas.drawLine(p1, p2, paint1);
+    // drawing
+    canvas.translate(radius, radius);
+    for (var i = 0; i < 5; i++) {
+      canvas.rotate(angle);
 
-    // * Arch
-    final diameter = size.height - 77;
-    const startAngle = -math.pi / 2;
-    const sweepAngle = -math.pi / 3.5;
-    const useCenter = false;
-    final paint = Paint()
-      ..color = isSaturday ? Colors.white : kPrimaryColor
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 23;
-    canvas.drawArc(Offset((size.width - diameter) / 2, (size.height - diameter) / 2) & Size(diameter, diameter),
-        startAngle, sweepAngle, useCenter, paint);
+      canvas.drawLine(
+        Offset(0.0, -radius + 27),
+        Offset(0.0, -radius + 27 + tickMarkLength),
+        paint1,
+      );
+    }
+
+    canvas.restore();
   }
 
   @override

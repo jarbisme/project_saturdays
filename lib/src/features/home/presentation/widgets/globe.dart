@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_saturdays/src/features/home/presentation/bloc/bloc/home_bloc.dart';
 import 'package:project_saturdays/src/features/home/presentation/widgets/indicator.dart';
+import 'package:project_saturdays/src/features/home/presentation/widgets/periods_ticks.dart';
 
 import 'period_highlight.dart';
 import 'dart:math' as math;
@@ -49,8 +50,9 @@ class Globe extends StatelessWidget {
                 ),
               ),
               // const Indicator(),
-              const Indicator(),
+              const PeriodsTicks(),
               const PeriodHighlight(),
+              const Indicator(),
             ],
           ),
         );

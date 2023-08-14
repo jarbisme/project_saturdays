@@ -101,7 +101,7 @@ class _SaturdayDetailsState extends State<SaturdayDetails> {
                       ),
                       Text(
                         // '3 d : 18 h : 25 m',
-                        printDuration(
+                        prettyDuration(
                           (aMinute * diferenceDate.inMinutes).inMinutes < 59 &&
                                   (aMinute * diferenceDate.inMinutes).inMinutes >= 0
                               ? aSecond * diferenceDate.inSeconds

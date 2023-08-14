@@ -13,16 +13,22 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   HomeBloc() : super(const HomeInitial()) {
     on<InitializeHome>((event, emit) async {
-      final date = DateTime(2023, 2, 17, 18, 36);
+      final date = DateTime.now();
+
+      // * START: For Testing
+      // final date = DateTime(2023, 8, 7, 18, 36);
       // final date = DateTime(2023, 2, 12, 18, 36);
+      // final sabbath = Sabbath(
+      //   startDateTime: date,
+      //   endDateTime: date.add(const Duration(days: 1)),
+      // );
+      // * END
+
       final sabbath = await _saturdayRepository.getSabbath();
+
       if (sabbath != null) {
         emit(
           SetHomeState(
-            // sabbath: Sabbath(
-            //   startDateTime: date,
-            //   endDateTime: date.add(const Duration(days: 1)),
-            // ),
             sabbath: sabbath,
             isSaturday: date.difference(DateTime.now()).isNegative ? true : false,
           ),

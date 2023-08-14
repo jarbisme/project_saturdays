@@ -5,6 +5,7 @@ import 'package:project_saturdays/src/features/home/domain/sabbath.dart';
 part 'sabbath_event.dart';
 part 'sabbath_state.dart';
 
+// ! NOT IN USE
 class SabbathBloc extends Bloc<SabbathEvent, SabbathState> {
   SabbathBloc() : super(SabbathInitial()) {
     on<LoadSabbath>((event, emit) {

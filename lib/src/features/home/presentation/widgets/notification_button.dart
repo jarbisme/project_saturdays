@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:project_saturdays/src/features/core/helpers/notification_helper.dart';
 import 'package:project_saturdays/src/features/core/services/notification_service.dart';
 import 'package:project_saturdays/src/features/notifications/presentation/notifications_screen.dart';
 
-import 'package:timezone/data/latest.dart' as tz;
+// import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class NotificationButton extends StatelessWidget {
@@ -12,8 +11,7 @@ class NotificationButton extends StatelessWidget {
 
   NotificationButton({Key? key, required this.isSaturday}) : super(key: key);
 
-  NotificationService _notificationService = NotificationService();
-  NotificationHelper _notificationHelper = NotificationHelper();
+  final _notificationService = NotificationService();
 
   @override
   Widget build(BuildContext context) {

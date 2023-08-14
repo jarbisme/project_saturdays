@@ -19,9 +19,9 @@ class _IndicatorState extends State<Indicator> {
     super.initState();
     time = DateTime.now();
     // time = DateTime.now().add(Duration(days: 5, hours: 6));
-    // time = DateTime(2023, 2, 17, 18, 36).add(Duration(hours: 24));
+    // time = DateTime(2023, 8, 18, 19, 9).add(Duration(hours: 0));
     _timer = Timer.periodic(const Duration(seconds: 1), setTime);
-    print(time.toString());
+    // print(time.toString());
   }
 
   void setTime(Timer timer) {
@@ -43,6 +43,8 @@ class _IndicatorState extends State<Indicator> {
       // angle: 2 * math.pi * time / (60 * 60 * 24 * 7),
       // angle: 2 * math.pi * time / (60 * 60),
       // angle: 2 * math.pi * ((7 / 7) + (12 / 168) + (30 / 10080) + (45 / 604800)),
+      // angle: 2 * math.pi * ((5 / 7) + (18 / 168) + (30 / 10080) + (0 / 604800)),
+      // angle: -0.75,
       angle: 2 * math.pi * ((time.weekday / 7) + ((time.hour) / 168) + (time.minute / 10080) + (time.second / 604800)),
       child: Center(
         child: Container(
@@ -51,7 +53,8 @@ class _IndicatorState extends State<Indicator> {
             builder: (context, constraints) {
               return CustomPaint(
                 size: Size(constraints.maxWidth, constraints.maxWidth),
-                painter: IndicatorPainter(),
+                painter: IndicatorCirclePainter(),
+                // painter: IndicatorPainter(),
               );
             },
           ),
@@ -72,9 +75,28 @@ class IndicatorPainter extends CustomPainter {
     final paint = Paint()
       ..color = Colors.black
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 50;
-    canvas.drawArc(Offset((size.width - diameter) / 2, (size.height - diameter) / 2) & Size(diameter, diameter),
+      ..strokeWidth = 40;
+    canvas.drawArc(Offset((size.width - diameter) / 2 - 3, (size.height - diameter) / 2) & Size(diameter, diameter),
         startAngle, sweepAngle, useCenter, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
+  }
+}
+
+class IndicatorCirclePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final diameter = size.height - 80;
+    final paint = Paint()
+      ..color = Colors.black
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 14;
+    //  + 6.5
+    canvas.drawCircle(Offset((size.width) / 2 + 19, (size.height - diameter) / 2), 1, paint);
+    // canvas.drawCircle(Offset((size.width - diameter) / 1, (size.height - diameter) / 1), 1, paint);
   }
 
   @override
