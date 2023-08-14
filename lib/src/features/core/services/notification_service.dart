@@ -65,11 +65,11 @@ class NotificationService {
     );
   }
 
-  Future<void> scheduleNotifications(int id, tz.TZDateTime scheduledDate) async {
+  Future<void> scheduleNotifications(int id, tz.TZDateTime scheduledDate, String title, String body) async {
     await flutterLocalNotificationsPlugin.zonedSchedule(
         id,
-        "Notification Title",
-        "This is the Notification Body!",
+        title,
+        body,
         // tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
         scheduledDate,
         NotificationDetails(android: _androidNotificationDetails),
@@ -83,6 +83,17 @@ class NotificationService {
 
   Future<void> cancelAllNotifications() async {
     await flutterLocalNotificationsPlugin.cancelAll();
+  }
+
+  Future<List<PendingNotificationRequest>> getPendingNotificationRequests() async {
+    final List<PendingNotificationRequest> pendingNotificationRequests =
+        await flutterLocalNotificationsPlugin.pendingNotificationRequests();
+    return pendingNotificationRequests;
+  }
+
+  Future<List<ActiveNotification>> getActiveNotifications() async {
+    final List<ActiveNotification> activeNotifications = await flutterLocalNotificationsPlugin.getActiveNotifications();
+    return activeNotifications;
   }
 }
 
