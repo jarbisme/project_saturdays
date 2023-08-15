@@ -19,13 +19,14 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final homeBloc = HomeBloc();
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => HomeBloc(),
+          create: (context) => homeBloc,
         ),
         BlocProvider(
-          create: (context) => NotificationsBloc(),
+          create: (context) => NotificationsBloc(homeBloc),
         )
       ],
       child: MaterialApp(

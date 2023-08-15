@@ -18,9 +18,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<HomeBloc>(context).add(InitializeHome());
-    BlocProvider.of<NotificationsBloc>(context).add(InitializeNotifications());
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
+        if (state.sabbath != null) {
+          BlocProvider.of<NotificationsBloc>(context).add(InitializeNotifications());
+        }
         return Scaffold(
           backgroundColor: state.isSaturday ? kPrimaryColor : kBackgroundColor,
           body: state.sabbath != null
