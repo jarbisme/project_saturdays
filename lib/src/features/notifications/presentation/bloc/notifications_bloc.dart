@@ -19,7 +19,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   final _notificationService = NotificationService();
 
   NotificationsBloc(this._homeBloc) : super(NotificationsInitial()) {
-    print('Initializing Notifications Module');
+    // print('Initializing Notifications Module');
 
     on<InitializeNotifications>((event, emit) async {
       var notifications = await _notificationsRepository.getNotifications();
@@ -132,10 +132,10 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     }
 
     // [DEBUG] print notifications
-    print('Notifications========================');
-    for (var noti in await _notificationService.getPendingNotificationRequests()) {
-      print(noti.title! + " | " + noti.body!);
-    }
+    // print('Notifications========================');
+    // for (var noti in await _notificationService.getPendingNotificationRequests()) {
+    //   print(noti.title! + " | " + noti.body!);
+    // }
   }
 }
 

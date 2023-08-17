@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:async';
 
 import 'package:duration/duration.dart';
@@ -36,14 +38,14 @@ class _SaturdayDetailsState extends State<SaturdayDetails> {
   void checkDiference() {
     if (widget.sabbath.startDateTime.difference(DateTime.now()).isNegative) {
       if (widget.isSaturday == false) {
-        print('Saturday!');
+        // print('Saturday!');
         // dispatch event SaturdayStarted
         BlocProvider.of<HomeBloc>(context).add(SabbathStarted());
         // isSaturday = true;
       }
     } else {
       if (widget.isSaturday == true) {
-        print('Not saturday');
+        // print('Not saturday');
         // dispatch event SaturdayEnded
         BlocProvider.of<HomeBloc>(context).add(SabbathEnded());
         // isSaturday = false;
@@ -97,7 +99,7 @@ class _SaturdayDetailsState extends State<SaturdayDetails> {
                     children: [
                       Text(
                         widget.isSaturday ? 'Saturday ends in' : 'Saturday starts in',
-                        style: TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 16),
                       ),
                       Text(
                         // '3 d : 18 h : 25 m',

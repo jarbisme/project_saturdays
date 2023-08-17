@@ -19,7 +19,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       // final date = DateTime(2023, 8, 7, 18, 36);
       // final date = DateTime(2023, 2, 12, 18, 36);
       // final sabbath = Sabbath(
-      //   startDateTime: date,
+      //   startDateTime: date.add(const Duration(seconds: 10)),
       //   endDateTime: date.add(const Duration(days: 1)),
       // );
       // * END

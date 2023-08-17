@@ -3,6 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/bloc/home_bloc.dart';
+
 class Indicator extends StatefulWidget {
   const Indicator({Key? key}) : super(key: key);
 
@@ -13,6 +17,7 @@ class Indicator extends StatefulWidget {
 class _IndicatorState extends State<Indicator> {
   late Timer _timer;
   late DateTime time;
+  late double angleOffset;
 
   @override
   void initState() {
@@ -31,35 +36,52 @@ class _IndicatorState extends State<Indicator> {
     });
   }
 
+  double calculateOffset(DateTime date) {
+    var hourOf = 0.039; // offset of 1 hour
+    var minOf = hourOf / 60;
+
+    return (hourOf * (23 - date.hour)) + (minOf * (60 - date.minute));
+  }
+
   @override
   void dispose() {
     _timer.cancel();
     super.dispose();
   }
 
+  var hourOf = 0.04;
   @override
   Widget build(BuildContext context) {
-    return Transform.rotate(
-      // angle: 2 * math.pi * time / (60 * 60 * 24 * 7),
-      // angle: 2 * math.pi * time / (60 * 60),
-      // angle: 2 * math.pi * ((7 / 7) + (12 / 168) + (30 / 10080) + (45 / 604800)),
-      // angle: 2 * math.pi * ((5 / 7) + (18 / 168) + (30 / 10080) + (0 / 604800)),
-      // angle: -0.75,
-      angle: 2 * math.pi * ((time.weekday / 7) + ((time.hour) / 168) + (time.minute / 10080) + (time.second / 604800)),
-      child: Center(
-        child: Container(
-          padding: const EdgeInsets.all(20),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return CustomPaint(
-                size: Size(constraints.maxWidth, constraints.maxWidth),
-                painter: IndicatorCirclePainter(),
-                // painter: IndicatorPainter(),
-              );
-            },
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        return Transform.rotate(
+          // angle: 2 * math.pi * time / (60 * 60 * 24 * 7),
+          // angle: 2 * math.pi * time / (60 * 60),
+          // angle: (2 * math.pi * ((6 / 7) + (19 / 168) + (08 / 10080) + (0 / 604800))) +
+          //     calculateOffset(DateTime(2023, 8, 18, 19, 08)), // Sunday 12:00 am
+          // angle: 2 * math.pi * ((6 / 7) + (19 / 168) + (07 / 10080) + (0 / 604800)) +
+          //     calculateOffset(state.sabbath!.startDateTime.toLocal()),
+          // angle: -0.75,
+          angle: 2 *
+                  math.pi *
+                  ((time.weekday / 7) + ((time.hour) / 168) + (time.minute / 10080) + (time.second / 604800)) +
+              calculateOffset(state.sabbath!.startDateTime.toLocal()),
+          child: Center(
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return CustomPaint(
+                    size: Size(constraints.maxWidth, constraints.maxWidth),
+                    painter: IndicatorCirclePainter(),
+                    // painter: IndicatorPainter(),
+                  );
+                },
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
@@ -94,9 +116,9 @@ class IndicatorCirclePainter extends CustomPainter {
       ..color = Colors.black
       ..style = PaintingStyle.stroke
       ..strokeWidth = 14;
-    //  + 6.5
-    canvas.drawCircle(Offset((size.width) / 2 + 19, (size.height - diameter) / 2), 1, paint);
-    // canvas.drawCircle(Offset((size.width - diameter) / 1, (size.height - diameter) / 1), 1, paint);
+    // canvas.drawCircle(Offset((size.width) / 2 + 19, (size.height - diameter) / 2), 1, paint);
+    // Offset for Sunday 12:00 am
+    canvas.drawCircle(Offset((size.width) / 2 - 9, (size.height - diameter) / 2), 1, paint);
   }
 
   @override
