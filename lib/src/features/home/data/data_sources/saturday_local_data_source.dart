@@ -19,6 +19,6 @@ class SaturdayLocalDataSource {
   }
 
   DateTime _formatCurrentDate(DateTime date, DateTime time) {
-    return DateTime(date.year, date.month, date.day, time.hour, time.minute, time.second);
+    return DateTime.utc(date.year, date.month, date.day, time.hour, time.minute, time.second);
   }
 }
