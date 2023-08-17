@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:project_saturdays/src/features/core/services/notification_service.dart';
+import 'package:project_saturdays/src/features/home/data/data_sources/saturday_helper.dart';
 import 'package:project_saturdays/src/features/home/domain/sabbath.dart';
 import 'package:project_saturdays/src/features/home/presentation/bloc/bloc/home_bloc.dart';
 import 'package:project_saturdays/src/features/notifications/data/repositories/notifications_repository.dart';
@@ -53,8 +54,27 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     // calculate notifications datetime ======================
     List<NotificationDetail> notificationDetails = [];
 
-    final startDate = tz.TZDateTime.from(sabbath.startDateTime, tz.local);
-    final endDate = tz.TZDateTime.from(sabbath.endDateTime, tz.local);
+    final nextFriday = SaturdayHelper.getFriday();
+    final nextSabbath = SaturdayHelper.getSaturday();
+
+    final startDate = tz.TZDateTime.from(
+      // set date for the immediate next friday
+      sabbath.startDateTime.copyWith(
+        year: nextFriday.year,
+        month: nextFriday.month,
+        day: nextFriday.day,
+      ),
+      tz.local,
+    );
+    final endDate = tz.TZDateTime.from(
+      // set date to the immediate next saturday
+      sabbath.endDateTime.copyWith(
+        day: nextSabbath.day,
+        month: nextSabbath.month,
+        year: nextSabbath.year,
+      ),
+      tz.local,
+    );
 
     for (var element in notifications) {
       if (element.isChecked) {
@@ -64,7 +84,8 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
             element.id,
             startDate.subtract(Duration(minutes: element.minutes)),
             'Sabbath begins in ${element.minutes} minutes',
-            'The sabbath starts at ${sabbath.startDateTime.toLocal().toString()}',
+            // 'The sabbath starts at ${sabbath.startDateTime.toLocal().toString()}',
+            'The sabbath starts at ${sabbath.startDateTime.toLocal().hour}:${sabbath.startDateTime.toLocal().minute}',
           ),
         );
         // endDate notifications
@@ -73,7 +94,8 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
             element.id * 24,
             endDate.subtract(Duration(minutes: element.minutes)),
             'Sabbath ends in ${element.minutes} minutes',
-            'The sabbath ends at ${sabbath.endDateTime.toLocal().toString()}',
+            // 'The sabbath ends at ${sabbath.endDateTime.toLocal().toString()}',
+            'The sabbath ends at ${sabbath.startDateTime.toLocal().hour}:${sabbath.startDateTime.toLocal().minute}',
           ),
         );
       }
@@ -112,7 +134,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     // [DEBUG] print notifications
     print('Notifications========================');
     for (var noti in await _notificationService.getPendingNotificationRequests()) {
-      print('notification => ' + noti.body!);
+      print(noti.title! + " | " + noti.body!);
     }
   }
 }
