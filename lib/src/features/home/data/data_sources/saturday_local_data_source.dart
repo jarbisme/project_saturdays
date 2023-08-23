@@ -11,6 +11,7 @@ class SaturdayLocalDataSource {
     return Sabbath(
       startDateTime: _formatCurrentDate(SaturdayHelper.getFriday(), DateTime.parse(sabbath['startDateTime'])),
       endDateTime: _formatCurrentDate(SaturdayHelper.getSaturday(), DateTime.parse(sabbath['endDateTime'])),
+      source: Source.local,
     );
   }
 

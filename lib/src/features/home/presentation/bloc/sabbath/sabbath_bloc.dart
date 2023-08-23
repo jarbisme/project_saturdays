@@ -15,6 +15,7 @@ class SabbathBloc extends Bloc<SabbathEvent, SabbathState> {
         sabbath: Sabbath(
           startDateTime: DateTime.now(),
           endDateTime: DateTime.now().add(const Duration(days: 1)),
+          source: Source.local,
         ),
       ));
     });

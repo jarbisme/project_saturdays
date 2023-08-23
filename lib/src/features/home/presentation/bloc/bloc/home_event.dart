@@ -5,7 +5,7 @@ abstract class HomeEvent {}
 
 class InitializeHome extends HomeEvent {}
 
-class LoadSabbath extends HomeEvent {}
+class RefreshHome extends HomeEvent {}
 
 class SabbathStarted extends HomeEvent {}
 

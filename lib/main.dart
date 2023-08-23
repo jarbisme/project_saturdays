@@ -33,10 +33,13 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Saturdays',
         theme: ThemeData(
-            colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: kPrimaryColor,
-          secondary: kPrimaryColor,
-        )),
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            primary: kPrimaryColor,
+            secondary: kPrimaryColor,
+            background: kBackgroundColor,
+          ),
+          fontFamily: 'Inter',
+        ),
         home: const HomeScreen(),
       ),
     );

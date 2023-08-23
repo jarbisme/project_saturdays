@@ -30,11 +30,32 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(
           SetHomeState(
             sabbath: sabbath,
-            isSaturday: date.difference(DateTime.now()).isNegative ? true : false,
+            // isSaturday: date.difference(DateTime.now()).isNegative ? true : false,
+            isSaturday: false,
           ),
         );
       } else {
-        emit(const ErrorHomeSate(errorMessage: 'Error trying to tech the data'));
+        emit(const ErrorHomeSate(errorMessage: 'Error trying to fech the data'));
+      }
+    });
+    on<RefreshHome>((event, emit) async {
+      print('RefreshHome');
+      emit(HomeLoading());
+
+      final date = DateTime.now();
+
+      final sabbath = await _saturdayRepository.getSabbath();
+
+      if (sabbath != null) {
+        emit(
+          SetHomeState(
+            sabbath: sabbath,
+            // isSaturday: date.difference(DateTime.now()).isNegative ? true : false,
+            isSaturday: false,
+          ),
+        );
+      } else {
+        emit(const ErrorHomeSate(errorMessage: 'Error trying to fech the data'));
       }
     });
     on<SabbathStarted>((event, emit) {
