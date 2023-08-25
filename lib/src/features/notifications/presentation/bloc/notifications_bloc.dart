@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:project_saturdays/src/features/core/services/notification_service.dart';
 import 'package:project_saturdays/src/features/home/data/data_sources/saturday_helper.dart';
 import 'package:project_saturdays/src/features/home/domain/sabbath.dart';
-import 'package:project_saturdays/src/features/home/presentation/bloc/bloc/home_bloc.dart';
+import 'package:project_saturdays/src/features/home/presentation/bloc/home_bloc.dart';
 import 'package:project_saturdays/src/features/notifications/data/repositories/notifications_repository.dart';
 import 'package:project_saturdays/src/features/notifications/domain/notification.dart';
 

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_saturdays/src/features/home/domain/sabbath.dart';
 import 'package:project_saturdays/src/styles/colors.dart';
 
-import '../bloc/bloc/home_bloc.dart';
+import '../bloc/home_bloc.dart';
 
 class NoConnectionBanner extends StatefulWidget {
   const NoConnectionBanner({

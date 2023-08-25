@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:project_saturdays/src/features/home/presentation/bloc/bloc/home_bloc.dart';
+import 'package:project_saturdays/src/features/home/presentation/bloc/home_bloc.dart';
 import 'dart:math' as math;
 
 class PeriodsTicks extends StatelessWidget {

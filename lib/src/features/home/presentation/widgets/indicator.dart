@@ -5,7 +5,7 @@ import 'dart:math' as math;
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/bloc/home_bloc.dart';
+import '../bloc/home_bloc.dart';
 
 class Indicator extends StatefulWidget {
   const Indicator({Key? key}) : super(key: key);
