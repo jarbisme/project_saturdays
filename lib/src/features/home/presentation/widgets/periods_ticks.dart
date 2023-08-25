@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_saturdays/src/features/home/presentation/bloc/bloc/home_bloc.dart';
-import 'package:project_saturdays/src/styles/colors.dart';
 import 'dart:math' as math;
 
 class PeriodsTicks extends StatelessWidget {
@@ -30,7 +29,7 @@ class PeriodsTicks extends StatelessWidget {
 }
 
 class HighlightPainter extends CustomPainter {
-  final isSaturday;
+  final bool isSaturday;
 
   HighlightPainter(this.isSaturday);
 

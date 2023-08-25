@@ -5,7 +5,6 @@ import 'package:project_saturdays/src/features/home/presentation/widgets/indicat
 import 'package:project_saturdays/src/features/home/presentation/widgets/periods_ticks.dart';
 
 import 'period_highlight.dart';
-import 'dart:math' as math;
 
 class Globe extends StatelessWidget {
   const Globe({super.key});

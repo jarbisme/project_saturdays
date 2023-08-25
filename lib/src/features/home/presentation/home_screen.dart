@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:project_saturdays/src/features/home/presentation/bloc/bloc/home_bloc.dart';
 import 'package:project_saturdays/src/features/notifications/presentation/bloc/notifications_bloc.dart';
-import 'package:project_saturdays/src/features/notifications/presentation/notifications_screen.dart';
 import 'package:project_saturdays/src/styles/colors.dart';
 import 'package:project_saturdays/src/features/home/presentation/widgets/globe.dart';
 import 'package:project_saturdays/src/features/home/presentation/widgets/saturday_details.dart';

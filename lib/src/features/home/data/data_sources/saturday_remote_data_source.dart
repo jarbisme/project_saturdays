@@ -21,7 +21,7 @@ class SaturdayRemoteDataSource {
       saturday = await _getSunset(formatter.format(SaturdayHelper.getSaturday()));
 
       if (friday != null && saturday != null) {
-        Sabbath sabbath = Sabbath(startDateTime: friday!, endDateTime: saturday!, source: Source.remote);
+        Sabbath sabbath = Sabbath(startDateTime: friday, endDateTime: saturday, source: Source.remote);
         return sabbath;
       } else {
         // throw Exception('Error');

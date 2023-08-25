@@ -13,8 +13,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   HomeBloc() : super(const HomeInitial()) {
     on<InitializeHome>((event, emit) async {
-      final date = DateTime.now();
-
       // * START: For Testing
       // final date = DateTime(2023, 8, 7, 18, 36);
       // final date = DateTime(2023, 2, 12, 18, 36);
@@ -40,9 +38,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     });
     on<RefreshHome>((event, emit) async {
       print('RefreshHome');
-      emit(HomeLoading());
-
-      final date = DateTime.now();
+      emit(const HomeLoading());
 
       final sabbath = await _saturdayRepository.getSabbath();
 
