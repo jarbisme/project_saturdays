@@ -14,11 +14,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(const HomeInitial()) {
     on<InitializeHome>((event, emit) async {
       // * START: For Testing
-      // final date = DateTime(2023, 8, 7, 18, 36);
-      // final date = DateTime(2023, 2, 12, 18, 36);
+      // // final date = DateTime(2023, 11, 5, 20, 7);
+      // // final date = DateTime(2023, 2, 12, 18, 36);
+      // final date = DateTime.now();
       // final sabbath = Sabbath(
       //   startDateTime: date.add(const Duration(seconds: 10)),
-      //   endDateTime: date.add(const Duration(days: 1)),
+      //   endDateTime: date.add(const Duration(seconds: 60)),
+      //   source: Source.remote,
       // );
       // * END
 

@@ -10,6 +10,8 @@ import 'package:project_saturdays/src/features/home/domain/sabbath.dart';
 import 'package:project_saturdays/src/features/home/presentation/bloc/home_bloc.dart';
 
 import 'package:project_saturdays/src/styles/colors.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SaturdayDetails extends StatefulWidget {
   Sabbath sabbath;
@@ -89,7 +91,7 @@ class _SaturdayDetailsState extends State<SaturdayDetails> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 DetaillHourInfo(
-                  title: 'Friday sunset',
+                  title: AppLocalizations.of(context)!.fridaySunset,
                   content: widget.sabbath.startDateTime,
                 ),
                 Padding(
@@ -98,7 +100,9 @@ class _SaturdayDetailsState extends State<SaturdayDetails> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.isSaturday ? 'Saturday ends in' : 'Saturday starts in',
+                        widget.isSaturday
+                            ? AppLocalizations.of(context)!.saturdayEndsIn
+                            : AppLocalizations.of(context)!.saturdayStartsIn,
                         style: const TextStyle(fontSize: 16),
                       ),
                       Text(
@@ -121,7 +125,7 @@ class _SaturdayDetailsState extends State<SaturdayDetails> {
                   ),
                 ),
                 DetaillHourInfo(
-                  title: 'Saturday sunset',
+                  title: AppLocalizations.of(context)!.saturdaySunset,
                   content: widget.sabbath.endDateTime,
                 ),
               ],

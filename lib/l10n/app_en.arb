@@ -1,0 +1,10 @@
+{
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "fridaySunset": "Friday sunset",
+  "saturdaySunset": "Saturday sunset",
+  "saturdayStartsIn": "Satuday starts in",
+  "saturdayEndsIn": "Satuday ends in"
+}

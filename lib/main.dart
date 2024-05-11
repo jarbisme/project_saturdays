@@ -8,6 +8,9 @@ import 'package:project_saturdays/src/features/notifications/presentation/bloc/n
 import 'package:project_saturdays/src/styles/colors.dart';
 import 'package:project_saturdays/src/features/home/presentation/home_screen.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   NotificationService().init();
@@ -40,6 +43,9 @@ class MyApp extends StatelessWidget {
           ),
           fontFamily: 'Inter',
         ),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        locale: const Locale('en'),
         home: const HomeScreen(),
       ),
     );
