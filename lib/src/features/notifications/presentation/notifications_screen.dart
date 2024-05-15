@@ -1,9 +1,13 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_saturdays/src/features/notifications/domain/notification.dart';
 import 'package:project_saturdays/src/styles/colors.dart';
 
 import 'bloc/notifications_bloc.dart';
+
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotificationsPage extends StatelessWidget {
   const NotificationsPage({
@@ -46,9 +50,9 @@ class NotificationsPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 40),
-                  const Text(
-                    'Notifications',
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  Text(
+                    AppLocalizations.of(context)!.notificationsTitle,
+                    style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 10),
@@ -60,9 +64,9 @@ class NotificationsPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const Text(
-                    'How many minutes before do you want to be notified?',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                  Text(
+                    AppLocalizations.of(context)!.notificationsDescription,
+                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
                   ),
                 ],
               ),

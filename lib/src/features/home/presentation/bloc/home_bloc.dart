@@ -1,3 +1,5 @@
+// ignore_for_file: dead_code, avoid_print
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
@@ -12,19 +14,25 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final _saturdayRepository = SaturdayRepository();
 
   HomeBloc() : super(const HomeInitial()) {
-    on<InitializeHome>((event, emit) async {
-      // * START: For Testing
-      // // final date = DateTime(2023, 11, 5, 20, 7);
-      // // final date = DateTime(2023, 2, 12, 18, 36);
-      // final date = DateTime.now();
-      // final sabbath = Sabbath(
-      //   startDateTime: date.add(const Duration(seconds: 10)),
-      //   endDateTime: date.add(const Duration(seconds: 60)),
-      //   source: Source.remote,
-      // );
-      // * END
+    // * START: For Testing
+    var imTesting = false;
+    // // final date = DateTime(2023, 11, 5, 20, 7);
+    // // final date = DateTime(2023, 2, 12, 18, 36);
+    final date = DateTime.now();
+    final testSabbath = Sabbath(
+      startDateTime: date.add(const Duration(seconds: 30)),
+      endDateTime: date.add(const Duration(seconds: 600)),
+      source: Source.remote,
+    );
+    // * END
 
-      final sabbath = await _saturdayRepository.getSabbath();
+    on<InitializeHome>((event, emit) async {
+      Sabbath? sabbath;
+      if (imTesting) {
+        sabbath = testSabbath;
+      } else {
+        sabbath = await _saturdayRepository.getSabbath();
+      }
 
       if (sabbath != null) {
         emit(
@@ -41,8 +49,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<RefreshHome>((event, emit) async {
       print('RefreshHome');
       emit(const HomeLoading());
-
-      final sabbath = await _saturdayRepository.getSabbath();
+      Sabbath? sabbath;
+      if (imTesting) {
+        sabbath = testSabbath;
+      } else {
+        sabbath = await _saturdayRepository.getSabbath();
+      }
 
       if (sabbath != null) {
         emit(

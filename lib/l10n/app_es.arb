@@ -1,7 +1,10 @@
 {
     "helloWorld": "¡Hola Mundo!",
+    "titleWidget": "Sábado",
     "fridaySunset": "Viernes atardecer",
     "saturdaySunset": "Sábado atardecer",
     "saturdayStartsIn": "Sábado empieza en",
-    "saturdayEndsIn": "Sábado termina en"
+    "saturdayEndsIn": "Sábado termina en",
+    "notificationsTitle": "Notificationes",
+    "notificationsDescription": "¿Cuántos minutos antes te gustaría recibir un recordatorio?"
 }

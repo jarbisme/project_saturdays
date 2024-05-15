@@ -4,19 +4,28 @@ import 'package:intl/intl.dart';
 import 'package:project_saturdays/src/features/home/presentation/bloc/home_bloc.dart';
 import 'package:project_saturdays/src/styles/colors.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class DayTitle extends StatelessWidget {
   const DayTitle({
     Key? key,
   }) : super(key: key);
 
+  String capitalize(String s) {
+    if (s.isEmpty) {
+      return s;
+    }
+    return s[0].toUpperCase() + s.substring(1);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        // DateFormat format = DateFormat("MMMM dd, yyyy");
-        // var formattedDate = format.parse(dateString);
-        final month = DateFormat.MMM().format(state.sabbath!.endDateTime);
-        // print(month);
+        final month = capitalize(DateFormat.MMM(Localizations.localeOf(context).languageCode)
+            .format(state.sabbath!.endDateTime)
+            .replaceAll(".", ""));
+
         return Padding(
           padding: const EdgeInsets.only(top: 0),
           child: Column(
@@ -42,7 +51,10 @@ class DayTitle extends StatelessWidget {
                           color: state.isSaturday ? Colors.white : kPrimaryColor)),
                 ],
               ),
-              const Text('Saturday', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, height: 1)),
+              Text(
+                AppLocalizations.of(context)!.titleWidget,
+                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, height: 1),
+              ),
             ],
           ),
         );

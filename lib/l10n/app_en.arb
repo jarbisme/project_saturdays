@@ -3,8 +3,11 @@
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
   },
+  "titleWidget": "Saturday",
   "fridaySunset": "Friday sunset",
   "saturdaySunset": "Saturday sunset",
   "saturdayStartsIn": "Satuday starts in",
-  "saturdayEndsIn": "Satuday ends in"
+  "saturdayEndsIn": "Satuday ends in",
+  "notificationsTitle": "Notifications",
+  "notificationsDescription": "How many minutes in advance would you like to be reminded?"
 }
