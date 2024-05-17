@@ -5,6 +5,8 @@ import 'package:project_saturdays/src/styles/colors.dart';
 
 import '../bloc/home_bloc.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class NoConnectionBanner extends StatefulWidget {
   const NoConnectionBanner({
     super.key,
@@ -53,11 +55,11 @@ class _NoConnectionBannerState extends State<NoConnectionBanner> {
                             color: isSaturday ? Colors.white.withOpacity(0.6) : const Color(0xFF8C96A0),
                           ),
                           children: [
-                            const TextSpan(
-                              text: 'It appears that there is not an internet connection. ',
+                            TextSpan(
+                              text: AppLocalizations.of(context)!.noConnectionBannerFirstText,
                             ),
                             TextSpan(
-                              text: 'Pull down to refresh',
+                              text: AppLocalizations.of(context)!.noConnectionBannerSecondText,
                               style: TextStyle(color: isSaturday ? Colors.white : kPrimaryColor),
                             )
                           ],

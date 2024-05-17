@@ -6,5 +6,7 @@
     "saturdayStartsIn": "Sábado empieza en",
     "saturdayEndsIn": "Sábado termina en",
     "notificationsTitle": "Notificationes",
-    "notificationsDescription": "¿Cuántos minutos antes te gustaría recibir un recordatorio?"
+    "notificationsDescription": "¿Cuántos minutos antes te gustaría recibir un recordatorio?",
+    "noConnectionBannerFirstText": "Parece que no hay conexión a internet. ",
+    "noConnectionBannerSecondText": "Desliza hacia abajo para actualizar"
 }

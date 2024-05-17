@@ -9,5 +9,7 @@
   "saturdayStartsIn": "Satuday starts in",
   "saturdayEndsIn": "Satuday ends in",
   "notificationsTitle": "Notifications",
-  "notificationsDescription": "How many minutes in advance would you like to be reminded?"
+  "notificationsDescription": "How many minutes in advance would you like to be reminded?",
+  "noConnectionBannerFirstText": "It appears that there is not an internet connection. ",
+  "noConnectionBannerSecondText": "Pull down to refresh"
 }
