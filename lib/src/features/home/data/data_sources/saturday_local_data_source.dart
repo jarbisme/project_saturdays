@@ -7,10 +7,23 @@ class SaturdayLocalDataSource {
 
   Future<Sabbath?> getSabbath() async {
     final sabbath = storage.getItem('sabbath');
+    var startDateTime = _formatCurrentDate(SaturdayHelper.getFriday(), DateTime.parse(sabbath['startDateTime']));
+    var endDateTime = _formatCurrentDate(SaturdayHelper.getSaturday(), DateTime.parse(sabbath['endDateTime']));
+
+    // If the startDateTime is after endDateTime, we need to subtract 7 days
+    if (startDateTime.isAfter(endDateTime)) {
+      startDateTime = startDateTime.subtract(const Duration(days: 7));
+    }
+
+    // If the endDateTime is NOT after now; meaning that it's a past sabbath, we need to get next week's sabbath
+    if (!endDateTime.isAfter(DateTime.now())) {
+      startDateTime = startDateTime.add(const Duration(days: 7));
+      endDateTime = endDateTime.add(const Duration(days: 7));
+    }
 
     return Sabbath(
-      startDateTime: _formatCurrentDate(SaturdayHelper.getFriday(), DateTime.parse(sabbath['startDateTime'])),
-      endDateTime: _formatCurrentDate(SaturdayHelper.getSaturday(), DateTime.parse(sabbath['endDateTime'])),
+      startDateTime: startDateTime,
+      endDateTime: endDateTime,
       source: Source.local,
     );
   }

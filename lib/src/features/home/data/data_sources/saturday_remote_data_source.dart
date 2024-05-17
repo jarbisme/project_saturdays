@@ -11,18 +11,38 @@ class SaturdayRemoteDataSource {
   static const sunriseSunsetURL = 'https://api.sunrise-sunset.org/json';
 
   Future<Sabbath?> getSabbath() async {
-    DateTime? friday;
-    DateTime? saturday;
+    DateTime? fridaySunset;
+    DateTime? saturdaySunset;
 
     final formatter = DateFormat('yyyy-MM-dd');
 
     try {
-      friday = await _getSunset(formatter.format(SaturdayHelper.getFriday()));
-      saturday = await _getSunset(formatter.format(SaturdayHelper.getSaturday()));
+      var friday = SaturdayHelper.getFriday();
+      var saturday = SaturdayHelper.getSaturday();
 
-      if (friday != null && saturday != null) {
-        Sabbath sabbath = Sabbath(startDateTime: friday, endDateTime: saturday, source: Source.remote);
-        return sabbath;
+      // If the friday is after saturday, we need to subtract 7 days
+      if (friday.isAfter(saturday)) {
+        friday = friday.subtract(const Duration(days: 7));
+      }
+
+      fridaySunset = await _getSunset(formatter.format(friday));
+      saturdaySunset = await _getSunset(formatter.format(saturday));
+
+      if (fridaySunset != null && saturdaySunset != null) {
+        // If saturdaySunset is NOT after now; meaning that it's a past sabbath, we need to get next week's sabbath
+        if (!saturdaySunset.isAfter(DateTime.now())) {
+          friday = friday.add(const Duration(days: 7));
+          saturday = saturday.add(const Duration(days: 7));
+          fridaySunset = await _getSunset(formatter.format(friday));
+          saturdaySunset = await _getSunset(formatter.format(saturday));
+        }
+
+        if (fridaySunset != null && saturdaySunset != null) {
+          Sabbath sabbath = Sabbath(startDateTime: fridaySunset, endDateTime: saturdaySunset, source: Source.remote);
+          return sabbath;
+        } else {
+          return null;
+        }
       } else {
         // throw Exception('Error');
         return null;

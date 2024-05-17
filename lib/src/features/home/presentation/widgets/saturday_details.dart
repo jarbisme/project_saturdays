@@ -23,39 +23,35 @@ class SaturdayDetails extends StatefulWidget {
 
 class _SaturdayDetailsState extends State<SaturdayDetails> {
   late Timer _timer;
-  // late bool isSaturday;
-  // late DateTime startDate;
-
   late Duration diferenceDate;
 
   @override
   void initState() {
     super.initState();
-    checkDiference();
+    checkSaturdayStatus();
     diferenceDate = widget.sabbath.startDateTime.difference(DateTime.now());
     _timer = Timer.periodic(const Duration(seconds: 1), setTime);
   }
 
-  void checkDiference() {
-    if (widget.sabbath.startDateTime.difference(DateTime.now()).isNegative) {
-      if (widget.isSaturday == false) {
-        // print('Saturday!');
-        // dispatch event SaturdayStarted
+  void checkSaturdayStatus() {
+    final bool isSaturday = widget.isSaturday;
+    final DateTime startDateTime = widget.sabbath.startDateTime;
+    final DateTime endDateTime = widget.sabbath.endDateTime;
+    final DateTime now = DateTime.now();
+
+    if (startDateTime.difference(now).isNegative && !endDateTime.difference(now).isNegative) {
+      if (!isSaturday) {
         BlocProvider.of<HomeBloc>(context).add(SabbathStarted());
-        // isSaturday = true;
       }
     } else {
-      if (widget.isSaturday == true) {
-        // print('Not saturday');
-        // dispatch event SaturdayEnded
+      if (isSaturday) {
         BlocProvider.of<HomeBloc>(context).add(SabbathEnded());
-        // isSaturday = false;
       }
     }
   }
 
   void setTime(Timer? timer) {
-    checkDiference();
+    checkSaturdayStatus();
     setState(() {
       if (widget.isSaturday) {
         diferenceDate = widget.sabbath.endDateTime.difference(DateTime.now());

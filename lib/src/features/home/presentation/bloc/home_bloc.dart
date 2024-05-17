@@ -14,25 +14,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final _saturdayRepository = SaturdayRepository();
 
   HomeBloc() : super(const HomeInitial()) {
-    // * START: For Testing
-    var imTesting = false;
-    // // final date = DateTime(2023, 11, 5, 20, 7);
-    // // final date = DateTime(2023, 2, 12, 18, 36);
-    final date = DateTime.now();
-    final testSabbath = Sabbath(
-      startDateTime: date.add(const Duration(seconds: 30)),
-      endDateTime: date.add(const Duration(seconds: 600)),
-      source: Source.remote,
-    );
-    // * END
-
     on<InitializeHome>((event, emit) async {
-      Sabbath? sabbath;
-      if (imTesting) {
-        sabbath = testSabbath;
-      } else {
-        sabbath = await _saturdayRepository.getSabbath();
-      }
+      Sabbath? sabbath = await _saturdayRepository.getSabbath();
 
       if (sabbath != null) {
         emit(
@@ -49,12 +32,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<RefreshHome>((event, emit) async {
       print('RefreshHome');
       emit(const HomeLoading());
-      Sabbath? sabbath;
-      if (imTesting) {
-        sabbath = testSabbath;
-      } else {
-        sabbath = await _saturdayRepository.getSabbath();
-      }
+      Sabbath? sabbath = await _saturdayRepository.getSabbath();
 
       if (sabbath != null) {
         emit(
@@ -72,9 +50,21 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       print('SabbathStarted');
       emit(SetHomeState(sabbath: state.sabbath!, isSaturday: true));
     });
-    on<SabbathEnded>((event, emit) {
+    on<SabbathEnded>((event, emit) async {
       print('SabbathEnded');
-      emit(SetHomeState(sabbath: state.sabbath!, isSaturday: false));
+      Sabbath? sabbath = await _saturdayRepository.getSabbath();
+
+      if (sabbath != null) {
+        emit(
+          SetHomeState(
+            sabbath: sabbath,
+            // isSaturday: date.difference(DateTime.now()).isNegative ? true : false,
+            isSaturday: false,
+          ),
+        );
+      } else {
+        emit(const ErrorHomeSate(errorMessage: 'Error trying to fech the data'));
+      }
     });
   }
 }
