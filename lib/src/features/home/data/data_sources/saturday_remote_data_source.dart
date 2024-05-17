@@ -68,6 +68,7 @@ class SaturdayRemoteDataSource {
     } catch (e) {
       print(e);
     }
+    return null;
   }
 
   /// Determine the current position of the device.
