@@ -23,7 +23,7 @@ class DayTitle extends StatelessWidget {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         final month = capitalize(DateFormat.MMM(Localizations.localeOf(context).languageCode)
-            .format(state.sabbath!.endDateTime)
+            .format(state.sabbath!.endDateTime.toLocal())
             .replaceAll(".", ""));
 
         return Padding(
@@ -41,7 +41,7 @@ class DayTitle extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: Text(state.sabbath!.endDateTime.day.toString(),
+                    child: Text(state.sabbath!.endDateTime.toLocal().day.toString(),
                         style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold)),
                   ),
                   Text(month,
