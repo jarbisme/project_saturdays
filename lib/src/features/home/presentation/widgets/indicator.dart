@@ -111,11 +111,11 @@ class IndicatorPainter extends CustomPainter {
 class IndicatorCirclePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final diameter = size.height - 80;
+    final diameter = size.height - 61;
     final paint = Paint()
       ..color = Colors.black
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 14;
+      ..strokeWidth = 12;
     // canvas.drawCircle(Offset((size.width) / 2 + 19, (size.height - diameter) / 2), 1, paint);
     // Offset for Sunday 12:00 am
     canvas.drawCircle(Offset((size.width) / 2 - 9, (size.height - diameter) / 2), 1, paint);

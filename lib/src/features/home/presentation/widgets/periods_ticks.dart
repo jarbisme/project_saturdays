@@ -12,7 +12,7 @@ class PeriodsTicks extends StatelessWidget {
       builder: (context, state) {
         return Center(
           child: Container(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(14),
             child: LayoutBuilder(
               builder: (context, constraints) {
                 return CustomPaint(
@@ -35,9 +35,9 @@ class HighlightPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    var tickMarkLength = 25;
+    var tickMarkLength = 18;
     final paint1 = Paint()
-      ..color = isSaturday ? Colors.white.withOpacity(0.3) : Colors.black.withOpacity(0.1)
+      ..color = isSaturday ? Colors.white.withOpacity(0.3) : Colors.black.withOpacity(0.2)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
     const angle = 2 * math.pi / 7;
@@ -46,7 +46,7 @@ class HighlightPainter extends CustomPainter {
 
     // drawing
     canvas.translate(radius, radius);
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < 7; i++) {
       canvas.rotate(angle);
 
       canvas.drawLine(

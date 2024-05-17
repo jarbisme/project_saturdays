@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:project_saturdays/src/features/home/presentation/bloc/home_bloc.dart';
 import 'package:project_saturdays/src/features/home/presentation/widgets/indicator.dart';
+import 'package:project_saturdays/src/features/home/presentation/widgets/period_ring.dart';
 import 'package:project_saturdays/src/features/home/presentation/widgets/periods_ticks.dart';
 
 import 'period_highlight.dart';
@@ -19,6 +20,11 @@ class Globe extends StatelessWidget {
             aspectRatio: 1,
             child: Stack(
               children: [
+                // const Indicator(),
+                const PeriodsTicks(),
+                const PeriodHighlight(),
+                const PeriodRing(),
+                const Indicator(),
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.all(75),
@@ -50,10 +56,6 @@ class Globe extends StatelessWidget {
                     ),
                   ),
                 ),
-                // const Indicator(),
-                const PeriodsTicks(),
-                const PeriodHighlight(),
-                const Indicator(),
               ],
             ),
           ),
