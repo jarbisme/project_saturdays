@@ -2,12 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:project_saturdays/l10n/app_localizations.dart';
 import 'package:project_saturdays/src/features/notifications/domain/notification.dart';
 import 'package:project_saturdays/src/styles/colors.dart';
 
 import 'bloc/notifications_bloc.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NotificationsPage extends StatelessWidget {
   const NotificationsPage({

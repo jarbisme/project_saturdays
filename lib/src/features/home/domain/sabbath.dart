@@ -14,13 +14,34 @@ class Sabbath {
     required this.source,
   });
 
-  toJSONEncodable() {
-    Map<String, dynamic> s = new Map();
+  Map<String, dynamic> toJson() {
+    return {
+      'startDateTime': startDateTime.toIso8601String(),
+      'endDateTime': endDateTime.toIso8601String(),
+      'source': source.name,
+    };
+  }
 
-    s['startDateTime'] = startDateTime.toString();
-    s['endDateTime'] = endDateTime.toString();
-    s['source'] = source.toString();
+  factory Sabbath.fromJson(Map<String, dynamic> json) {
+    return Sabbath(
+      startDateTime: DateTime.parse(json['startDateTime']),
+      endDateTime: DateTime.parse(json['endDateTime']),
+      source: Source.values.firstWhere(
+        (e) => e.name == json['source'],
+        orElse: () => Source.local,
+      ),
+    );
+  }
 
-    return s;
+  Sabbath copyWith({
+    DateTime? startDateTime,
+    DateTime? endDateTime,
+    Source? source,
+  }) {
+    return Sabbath(
+      startDateTime: startDateTime ?? this.startDateTime,
+      endDateTime: endDateTime ?? this.endDateTime,
+      source: source ?? this.source,
+    );
   }
 }

@@ -46,9 +46,9 @@ class NotificationService {
       initializationSettings,
       // onSelectNotification: selectNotification,
     );
-    flutterLocalNotificationsPlugin
+    await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-        ?.requestPermission();
+        ?.requestNotificationsPermission();
   }
 
   AndroidNotificationDetails _androidNotificationDetails = AndroidNotificationDetails(
@@ -77,8 +77,7 @@ class NotificationService {
         // tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5)),
         scheduledDate,
         NotificationDetails(android: _androidNotificationDetails),
-        androidAllowWhileIdle: true,
-        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime);
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle);
   }
 
   Future<void> cancelNotifications(int id) async {

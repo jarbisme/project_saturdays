@@ -1,16 +1,30 @@
+import 'dart:convert';
 import 'package:localstorage/localstorage.dart';
-// import 'package:project_saturdays/src/features/home/data/data_sources/saturday_helper.dart';
 import 'package:project_saturdays/src/features/home/domain/sabbath.dart';
 
 class SaturdayLocalDataSource {
-  final LocalStorage storage = LocalStorage('saturdays');
+  static const String _sabbathKey = 'sabbath';
 
   Future<Sabbath?> getSabbath() async {
-    final sabbath = storage.getItem('sabbath');
-    // var startDateTime = _formatCurrentDate(SaturdayHelper.getFriday(), DateTime.parse(sabbath['startDateTime']));
-    // var endDateTime = _formatCurrentDate(SaturdayHelper.getSaturday(), DateTime.parse(sabbath['endDateTime']));
-    var startDateTime = DateTime.parse(sabbath['startDateTime']);
-    var endDateTime = DateTime.parse(sabbath['endDateTime']);
+    final sabbathData = localStorage.getItem(_sabbathKey);
+
+    if (sabbathData != null) {
+      return _fromLocalStorage(sabbathData);
+    }
+
+    return null;
+  }
+
+  Future<void> saveSabbath(Sabbath sabbath) async {
+    localStorage.setItem(_sabbathKey, _toLocalStorage(sabbath));
+  }
+
+  /// Converts JSON string from local storage to Sabbath model
+  Sabbath _fromLocalStorage(String jsonString) {
+    final Map<String, dynamic> json = jsonDecode(jsonString);
+
+    var startDateTime = DateTime.parse(json['startDateTime']);
+    var endDateTime = DateTime.parse(json['endDateTime']);
 
     // If the startDateTime is after endDateTime, we need to subtract 7 days
     if (startDateTime.isAfter(endDateTime)) {
@@ -30,12 +44,8 @@ class SaturdayLocalDataSource {
     );
   }
 
-  void saveSabbath(Sabbath sabbath) async {
-    storage.setItem('sabbath', sabbath.toJSONEncodable());
+  /// Converts Sabbath model to JSON string for local storage
+  String _toLocalStorage(Sabbath sabbath) {
+    return jsonEncode(sabbath.toJson());
   }
-
-  // This is not longer needed
-  // DateTime _formatCurrentDate(DateTime date, DateTime time) {
-  //   return DateTime.utc(date.year, date.month, date.day, time.hour, time.minute, time.second);
-  // }
 }

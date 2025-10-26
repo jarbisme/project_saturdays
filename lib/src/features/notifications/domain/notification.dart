@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 
 enum NotificationTime { m15, m30, m60, m90m }
@@ -17,14 +19,20 @@ class NotificationModel {
     );
   }
 
-  toJSONEncodable() {
-    Map<String, dynamic> n = Map();
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'minutes': minutes,
+      'isChecked': isChecked,
+    };
+  }
 
-    n['id'] = id;
-    n['isChecked'] = isChecked;
-    n['minutes'] = minutes;
-
-    return n;
+  factory NotificationModel.fromJson(Map<String, dynamic> json) {
+    return NotificationModel(
+      id: json['id'],
+      isChecked: json['isChecked'],
+      minutes: json['minutes'],
+    );
   }
 }
 
@@ -33,9 +41,14 @@ class NotificationList {
 
   NotificationList({required this.notifications});
 
-  toJSONEncodable() {
-    return notifications.map((n) {
-      return n.toJSONEncodable();
-    }).toList();
+  String toJsonString() {
+    final List<Map<String, dynamic>> jsonList = notifications.map((n) => n.toJson()).toList();
+    return jsonEncode(jsonList);
+  }
+
+  factory NotificationList.fromJsonString(String jsonString) {
+    final List<dynamic> jsonList = jsonDecode(jsonString);
+    final List<NotificationModel> notifications = jsonList.map((json) => NotificationModel.fromJson(json)).toList();
+    return NotificationList(notifications: notifications);
   }
 }

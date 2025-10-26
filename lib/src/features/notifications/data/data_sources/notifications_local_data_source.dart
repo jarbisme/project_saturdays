@@ -3,17 +3,17 @@ import 'package:project_saturdays/src/features/notifications/domain/notification
 import 'package:project_saturdays/src/features/notifications/utils/notifications_builder.dart';
 
 class NotificationsLocalDataSource {
-  final LocalStorage storage = LocalStorage('notifications');
+  // final LocalStorage storage = LocalStorage('notifications');
 
   NotificationsLocalDataSource() {}
 
   Future<List<NotificationModel>?> getNotifications() async {
-    var notifications = storage.getItem('notifications');
+    var notificationsData = localStorage.getItem('notifications');
 
     // check is there are notificiations saved
-    if (notifications != null) {
+    if (notificationsData != null) {
       return List<NotificationModel>.from(
-        (notifications as List).map(
+        (notificationsData as List).map(
           (n) => NotificationModel(
             id: n['id'],
             minutes: n['minutes'],
@@ -23,14 +23,14 @@ class NotificationsLocalDataSource {
       );
     } else {
       // if there are not notifications yet, insert them
-      notifications = NotificationsBuilder.buildNoficiations();
+      final defaultNotifications = NotificationsBuilder.buildNoficiations();
 
-      saveNotifications(NotificationList(notifications: notifications));
-      return notifications;
+      saveNotifications(NotificationList(notifications: defaultNotifications));
+      return defaultNotifications;
     }
   }
 
   Future<void> saveNotifications(NotificationList notifications) async {
-    await storage.setItem('notifications', notifications.toJSONEncodable());
+    localStorage.setItem('notifications', notifications.toJsonString());
   }
 }

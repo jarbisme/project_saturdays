@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:project_saturdays/l10n/app_localizations.dart';
 import 'package:project_saturdays/src/features/core/services/notification_service.dart';
 
 import 'package:project_saturdays/src/features/home/presentation/bloc/home_bloc.dart';
@@ -8,10 +10,9 @@ import 'package:project_saturdays/src/features/notifications/presentation/bloc/n
 import 'package:project_saturdays/src/styles/colors.dart';
 import 'package:project_saturdays/src/features/home/presentation/home_screen.dart';
 
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initLocalStorage();
   NotificationService().init();
   await Hive.initFlutter();
   runApp(const MyApp());

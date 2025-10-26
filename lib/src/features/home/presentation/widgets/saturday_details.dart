@@ -6,11 +6,11 @@ import 'package:duration/duration.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:project_saturdays/l10n/app_localizations.dart';
 import 'package:project_saturdays/src/features/home/domain/sabbath.dart';
 import 'package:project_saturdays/src/features/home/presentation/bloc/home_bloc.dart';
 
 import 'package:project_saturdays/src/styles/colors.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SaturdayDetails extends StatefulWidget {
   Sabbath sabbath;
